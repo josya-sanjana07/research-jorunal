@@ -1,0 +1,710 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Research Journal Management System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gray-50 relative overflow-x-hidden text-gray-700">
+  <!-- Background Image -->
+  <img
+    src="https://wallpaperaccess.com/full/2132976.jpg"
+    alt="Abstract research journal management background with digital data and academic symbols"
+    class="fixed inset-0 w-full h-full object-cover opacity-40 -z-10 brightness-110"
+    aria-hidden="true"
+  />
+
+  <!-- Navbar -->
+  <nav class="bg-white bg-opacity-90 backdrop-blur-md shadow-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <a href="#" class="flex items-center space-x-2">
+          <i class="fas fa-book-open text-indigo-600 text-3xl"></i>
+          <span class="font-semibold text-xl text-gray-700">RJMS</span>
+        </a>
+        <div class="hidden md:flex space-x-8 font-medium text-gray-700">
+          <a href="#dashboard" class="hover:text-indigo-600 transition">Dashboard</a>
+          <a href="#submissions" class="hover:text-indigo-600 transition">Submissions</a>
+          <a href="#reviewers" class="hover:text-indigo-600 transition">Reviewers</a>
+          <a href="#published" class="hover:text-indigo-600 transition">Published</a>
+          <a href="#profile" class="hover:text-indigo-600 transition">Profile</a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" aria-label="Toggle menu" class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-600">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white bg-opacity-90 backdrop-blur-md shadow-inner">
+      <a href="#dashboard" class="block px-4 py-2 border-b border-gray-200 hover:bg-indigo-50 text-indigo-700 font-semibold">Dashboard</a>
+      <a href="#submissions" class="block px-4 py-2 border-b border-gray-200 hover:bg-indigo-50">Submissions</a>
+      <a href="#reviewers" class="block px-4 py-2 border-b border-gray-200 hover:bg-indigo-50">Reviewers</a>
+      <a href="#published" class="block px-4 py-2 border-b border-gray-200 hover:bg-indigo-50">Published</a>
+      <a href="#profile" class="block px-4 py-2 hover:bg-indigo-50">Profile</a>
+    </div>
+  </nav>
+
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="mb-12">
+      <h1 class="text-4xl font-extrabold text-gray-800 mb-6">Welcome to the Research Journal Management System</h1>
+      <p class="text-lg max-w-3xl">
+        Manage your research papers seamlessly. Submit, review, track revisions, detect plagiarism, and publish all in one platform.
+      </p>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6 flex flex-col items-center">
+          <i class="fas fa-file-upload text-indigo-600 text-5xl mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2 text-gray-800">Submit Paper</h2>
+          <p class="text-center">Upload your research paper for editorial review and peer feedback.</p>
+        </div>
+        <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6 flex flex-col items-center">
+          <i class="fas fa-user-edit text-indigo-600 text-5xl mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2 text-gray-800">Review & Feedback</h2>
+          <p class="text-center">Editors and reviewers can provide detailed feedback and track revisions.</p>
+        </div>
+        <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6 flex flex-col items-center">
+          <i class="fas fa-book text-indigo-600 text-5xl mb-4"></i>
+          <h2 class="text-xl font-semibold mb-2 text-gray-800">Publish & Archive</h2>
+          <p class="text-center">Accepted papers are published and archived for easy access and citation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submissions Section -->
+    <section id="submissions" class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Paper Submissions</h2>
+      <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6">
+        <form id="submission-form" class="space-y-6 max-w-3xl mx-auto">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Submit a New Paper</h3>
+          <div>
+            <label for="title" class="block font-medium mb-1">Paper Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Enter the title of your research paper"
+            />
+          </div>
+          <div>
+            <label for="authors" class="block font-medium mb-1">Authors</label>
+            <input
+              type="text"
+              id="authors"
+              name="authors"
+              required
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="List all authors separated by commas"
+            />
+          </div>
+          <div>
+            <label for="abstract" class="block font-medium mb-1">Abstract</label>
+            <textarea
+              id="abstract"
+              name="abstract"
+              rows="4"
+              required
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Provide a brief summary of your research"
+            ></textarea>
+          </div>
+          <div>
+            <label for="file" class="block font-medium mb-1">Upload Paper (PDF)</label>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              accept=".pdf"
+              required
+              class="w-full text-gray-700"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-md transition"
+          >
+            Submit Paper
+          </button>
+          <p id="submission-message" class="mt-3 text-green-600 font-medium hidden"></p>
+        </form>
+      </div>
+
+      <div class="mt-10 max-w-5xl mx-auto">
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Submitted Papers</h3>
+        <div id="submissions-list" class="space-y-4 max-h-96 overflow-y-auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviewers Section -->
+    <section id="reviewers" class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Reviewers Management</h2>
+      <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6 max-w-5xl mx-auto">
+        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6">
+          <h3 class="text-2xl font-semibold mb-4 md:mb-0 text-gray-800">Assign Reviewers</h3>
+          <form id="assign-reviewer-form" class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <select
+              id="paper-select"
+              required
+              class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64"
+            >
+              <option value="" disabled selected>Select Paper</option>
+            </select>
+            <select
+              id="reviewer-select"
+              required
+              class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64"
+            >
+              <option value="" disabled selected>Select Reviewer</option>
+            </select>
+            <button
+              type="submit"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-md transition w-full sm:w-auto"
+            >
+              Assign
+            </button>
+          </form>
+        </div>
+
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Reviewers List</h3>
+        <div id="reviewers-list" class="space-y-4 max-h-96 overflow-y-auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- Published Section -->
+    <section id="published" class="mb-12">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Published Papers</h2>
+      <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6 max-w-6xl mx-auto">
+        <div id="published-list" class="space-y-6 max-h-[28rem] overflow-y-auto">
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="mb-12 max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">User Profile</h2>
+      <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-lg shadow p-6">
+        <form id="profile-form" class="space-y-6">
+          <div>
+            <label for="name" class="block font-medium mb-1">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Your full name"
+              required
+            />
+          </div>
+          <div>
+            <label for="email" class="block font-medium mb-1">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div>
+            <label for="role" class="block font-medium mb-1">Role</label>
+            <select
+              id="role"
+              name="role"
+              class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            >
+              <option value="author">Author</option>
+              <option value="editor">Editor</option>
+              <option value="reviewer">Reviewer</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-md transition"
+          >
+            Update Profile
+          </button>
+          <p id="profile-message" class="mt-3 text-green-600 font-medium hidden"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-white bg-opacity-90 backdrop-blur-md shadow-inner py-6 text-center text-gray-600 text-sm">
+    &copy; 2024 Research Journal Management System. All rights reserved.
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Data storage simulation
+    let submissions = [];
+    let reviewers = [
+      { id: 1, name: 'Dr. Alice Johnson', expertise: 'Computer Science' },
+      { id: 2, name: 'Prof. Bob Smith', expertise: 'Physics' },
+      { id: 3, name: 'Dr. Carol Lee', expertise: 'Biology' },
+      { id: 4, name: 'Dr. David Kim', expertise: 'Mathematics' },
+      { id: 5, name: 'Prof. Eva Martinez', expertise: 'Chemistry' }
+    ];
+    let assignments = [];
+    let published = [];
+    let userProfile = {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      role: 'author'
+    };
+
+    // Elements
+    const submissionsList = document.getElementById('submissions-list');
+    const publishedList = document.getElementById('published-list');
+    const reviewersList = document.getElementById('reviewers-list');
+    const paperSelect = document.getElementById('paper-select');
+    const reviewerSelect = document.getElementById('reviewer-select');
+    const submissionForm = document.getElementById('submission-form');
+    const submissionMessage = document.getElementById('submission-message');
+    const assignReviewerForm = document.getElementById('assign-reviewer-form');
+    const profileForm = document.getElementById('profile-form');
+    const profileMessage = document.getElementById('profile-message');
+
+    // Initialize profile form
+    function loadUserProfile() {
+      profileForm.name.value = userProfile.name;
+      profileForm.email.value = userProfile.email;
+      profileForm.role.value = userProfile.role;
+    }
+    loadUserProfile();
+
+    // Render submissions list
+    function renderSubmissions() {
+      submissionsList.innerHTML = '';
+      paperSelect.innerHTML = '<option value="" disabled selected>Select Paper</option>';
+      if (submissions.length === 0) {
+        submissionsList.innerHTML = '<p class="text-gray-600 italic">No submissions yet.</p>';
+        return;
+      }
+      submissions.forEach((paper, index) => {
+        // Add to paper select for reviewer assignment if not published
+        if (!paper.published) {
+          const option = document.createElement('option');
+          option.value = paper.id;
+          option.textContent = paper.title;
+          paperSelect.appendChild(option);
+        }
+
+        const div = document.createElement('div');
+        div.className = 'border border-gray-300 rounded-md p-4 bg-white shadow-sm';
+
+        const title = document.createElement('h4');
+        title.className = 'text-lg font-semibold text-gray-800';
+        title.textContent = paper.title;
+
+        const authors = document.createElement('p');
+        authors.className = 'mb-2';
+        authors.innerHTML = `<strong>Authors:</strong> ${paper.authors}`;
+
+        const abstract = document.createElement('p');
+        abstract.className = 'text-gray-600 mb-2';
+        abstract.innerHTML = `<strong>Abstract:</strong> ${paper.abstract}`;
+
+        const status = document.createElement('p');
+        status.className = 'text-sm font-semibold mb-2';
+        status.innerHTML = `<strong>Status:</strong> <span class="capitalize">${paper.status}</span>`;
+
+        // Plagiarism check simulation
+        const plagiarism = document.createElement('p');
+        plagiarism.className = 'text-sm mb-2';
+        if (paper.plagiarismScore !== undefined) {
+          plagiarism.innerHTML = `<strong>Plagiarism Score:</strong> ${paper.plagiarismScore}%`;
+          plagiarism.classList.add(paper.plagiarismScore > 20 ? 'text-red-600' : 'text-green-600');
+        } else {
+          plagiarism.textContent = 'Plagiarism Score: Not checked';
+          plagiarism.classList.add('text-gray-500');
+        }
+
+        // Reviewers assigned
+        const assignedReviewers = assignments
+          .filter(a => a.paperId === paper.id)
+          .map(a => {
+            const r = reviewers.find(r => r.id === a.reviewerId);
+            return r ? r.name : 'Unknown';
+          });
+
+        const reviewersEl = document.createElement('p');
+        reviewersEl.className = 'text-sm mb-2';
+        reviewersEl.innerHTML = `<strong>Reviewers:</strong> ${
+          assignedReviewers.length > 0 ? assignedReviewers.join(', ') : 'None assigned'
+        }`;
+
+        // Feedback and revision tracking
+        const feedbacks = paper.feedbacks || [];
+        const feedbackEl = document.createElement('details');
+        feedbackEl.className = 'mb-2';
+        const summary = document.createElement('summary');
+        summary.className = 'cursor-pointer font-semibold text-indigo-600';
+        summary.textContent = `Feedback (${feedbacks.length})`;
+        feedbackEl.appendChild(summary);
+
+        if (feedbacks.length === 0) {
+          const noFeedback = document.createElement('p');
+          noFeedback.className = 'text-gray-600 ml-4 mt-1';
+          noFeedback.textContent = 'No feedback yet.';
+          feedbackEl.appendChild(noFeedback);
+        } else {
+          feedbacks.forEach((fb, i) => {
+            const fbDiv = document.createElement('div');
+            fbDiv.className = 'ml-4 mt-2 p-2 border-l-2 border-indigo-300 bg-indigo-50 rounded';
+            fbDiv.innerHTML = `<p><strong>Reviewer:</strong> ${fb.reviewerName}</p>
+              <p><strong>Comments:</strong> ${fb.comments}</p>
+              <p><strong>Date:</strong> ${new Date(fb.date).toLocaleDateString()}</p>`;
+            feedbackEl.appendChild(fbDiv);
+          });
+        }
+
+        // Revision tracking
+        const revisions = paper.revisions || [];
+        const revisionsEl = document.createElement('details');
+        revisionsEl.className = 'mb-2';
+        const revSummary = document.createElement('summary');
+        revSummary.className = 'cursor-pointer font-semibold text-indigo-600';
+        revSummary.textContent = `Revisions (${revisions.length})`;
+        revisionsEl.appendChild(revSummary);
+
+        if (revisions.length === 0) {
+          const noRevs = document.createElement('p');
+          noRevs.className = 'text-gray-600 ml-4 mt-1';
+          noRevs.textContent = 'No revisions submitted.';
+          revisionsEl.appendChild(noRevs);
+        } else {
+          revisions.forEach((rev, i) => {
+            const revDiv = document.createElement('div');
+            revDiv.className = 'ml-4 mt-2 p-2 border-l-2 border-green-300 bg-green-50 rounded';
+            revDiv.innerHTML = `<p><strong>Revision #${i + 1}</strong></p>
+              <p><strong>Date:</strong> ${new Date(rev.date).toLocaleDateString()}</p>
+              <p><a href="${rev.fileUrl}" target="_blank" class="text-indigo-600 underline">View Revision PDF</a></p>`;
+            revisionsEl.appendChild(revDiv);
+          });
+        }
+
+        // Action buttons for author/editor
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'flex flex-wrap gap-3 mt-3';
+
+        // If author and paper is under review or revision, allow upload revision
+        if (
+          (userProfile.role === 'author' || userProfile.role === 'editor') &&
+          (paper.status === 'under review' || paper.status === 'revision requested')
+        ) {
+          const revisionLabel = document.createElement('label');
+          revisionLabel.className =
+            'cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2';
+          revisionLabel.innerHTML = '<i class="fas fa-upload"></i> Upload Revision';
+          const revisionInput = document.createElement('input');
+          revisionInput.type = 'file';
+          revisionInput.accept = '.pdf';
+          revisionInput.className = 'hidden';
+          revisionInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            // Simulate upload and add revision
+            const revision = {
+              date: new Date().toISOString(),
+              fileUrl: URL.createObjectURL(file)
+            };
+            paper.revisions = paper.revisions || [];
+            paper.revisions.push(revision);
+            paper.status = 'under review';
+            alert('Revision uploaded successfully.');
+            renderSubmissions();
+            renderPublished();
+          });
+          revisionLabel.appendChild(revisionInput);
+          actionsDiv.appendChild(revisionLabel);
+        }
+
+        // Editor can accept or request revision or reject
+        if (userProfile.role === 'editor' && paper.status !== 'published' && paper.status !== 'rejected') {
+          const acceptBtn = document.createElement('button');
+          acceptBtn.className =
+            'bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2';
+          acceptBtn.innerHTML = '<i class="fas fa-check"></i> Accept';
+          acceptBtn.addEventListener('click', () => {
+            paper.status = 'published';
+            paper.published = true;
+            paper.publishedDate = new Date().toISOString();
+            published.push(paper);
+            alert('Paper accepted and published.');
+            renderSubmissions();
+            renderPublished();
+          });
+
+          const revisionBtn = document.createElement('button');
+          revisionBtn.className =
+            'bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2';
+          revisionBtn.innerHTML = '<i class="fas fa-edit"></i> Request Revision';
+          revisionBtn.addEventListener('click', () => {
+            paper.status = 'revision requested';
+            alert('Revision requested from author.');
+            renderSubmissions();
+          });
+
+          const rejectBtn = document.createElement('button');
+          rejectBtn.className =
+            'bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2';
+          rejectBtn.innerHTML = '<i class="fas fa-times"></i> Reject';
+          rejectBtn.addEventListener('click', () => {
+            paper.status = 'rejected';
+            alert('Paper rejected.');
+            renderSubmissions();
+          });
+
+          actionsDiv.appendChild(acceptBtn);
+          actionsDiv.appendChild(revisionBtn);
+          actionsDiv.appendChild(rejectBtn);
+        }
+
+        // Reviewer can add feedback if assigned and paper is under review or revision requested
+        if (
+          userProfile.role === 'reviewer' &&
+          assignedReviewers.includes(userProfile.name) &&
+          (paper.status === 'under review' || paper.status === 'revision requested')
+        ) {
+          const feedbackBtn = document.createElement('button');
+          feedbackBtn.className =
+            'bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm flex items-center gap-2';
+          feedbackBtn.innerHTML = '<i class="fas fa-comment-dots"></i> Add Feedback';
+          feedbackBtn.addEventListener('click', () => {
+            const comments = prompt('Enter your feedback comments:');
+            if (comments && comments.trim() !== '') {
+              paper.feedbacks = paper.feedbacks || [];
+              paper.feedbacks.push({
+                reviewerName: userProfile.name,
+                comments: comments.trim(),
+                date: new Date().toISOString()
+              });
+              alert('Feedback submitted.');
+              renderSubmissions();
+            }
+          });
+          actionsDiv.appendChild(feedbackBtn);
+        }
+
+        div.appendChild(title);
+        div.appendChild(authors);
+        div.appendChild(abstract);
+        div.appendChild(status);
+        div.appendChild(plagiarism);
+        div.appendChild(reviewersEl);
+        div.appendChild(feedbackEl);
+        div.appendChild(revisionsEl);
+        div.appendChild(actionsDiv);
+
+        submissionsList.appendChild(div);
+      });
+    }
+
+    // Render reviewers list
+    function renderReviewers() {
+      reviewersList.innerHTML = '';
+      if (reviewers.length === 0) {
+        reviewersList.innerHTML = '<p class="text-gray-600 italic">No reviewers available.</p>';
+        return;
+      }
+      reviewers.forEach((rev) => {
+        const div = document.createElement('div');
+        div.className = 'border border-gray-300 rounded-md p-4 bg-white shadow-sm flex justify-between items-center';
+
+        const info = document.createElement('div');
+        info.innerHTML = `<p class="font-semibold text-gray-800">${rev.name}</p>
+          <p class="text-gray-600 text-sm">Expertise: ${rev.expertise}</p>`;
+
+        const assignedPapers = assignments
+          .filter(a => a.reviewerId === rev.id)
+          .map(a => {
+            const p = submissions.find(s => s.id === a.paperId);
+            return p ? p.title : 'Unknown';
+          });
+
+        const assignedEl = document.createElement('p');
+        assignedEl.className = 'text-sm text-gray-700 max-w-xs truncate';
+        assignedEl.title = assignedPapers.join(', ');
+        assignedEl.textContent = `Assigned Papers: ${assignedPapers.length}`;
+
+        div.appendChild(info);
+        div.appendChild(assignedEl);
+
+        reviewersList.appendChild(div);
+      });
+    }
+
+    // Render published papers
+    function renderPublished() {
+      publishedList.innerHTML = '';
+      if (published.length === 0) {
+        publishedList.innerHTML = '<p class="text-gray-600 italic">No published papers yet.</p>';
+        return;
+      }
+      published.forEach((paper) => {
+        const div = document.createElement('div');
+        div.className = 'border border-gray-300 rounded-md p-4 bg-white shadow-sm';
+
+        const title = document.createElement('h4');
+        title.className = 'text-lg font-semibold text-gray-800';
+        title.textContent = paper.title;
+
+        const authors = document.createElement('p');
+        authors.className = 'mb-2';
+        authors.innerHTML = `<strong>Authors:</strong> ${paper.authors}`;
+
+        const abstract = document.createElement('p');
+        abstract.className = 'text-gray-600 mb-2';
+        abstract.innerHTML = `<strong>Abstract:</strong> ${paper.abstract}`;
+
+        const publishedDate = document.createElement('p');
+        publishedDate.className = 'text-sm text-gray-600 mb-2';
+        publishedDate.innerHTML = `<strong>Published on:</strong> ${new Date(paper.publishedDate || Date.now()).toLocaleDateString()}`;
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = paper.fileUrl || '#';
+        downloadLink.target = '_blank';
+        downloadLink.className = 'inline-block mt-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm';
+        downloadLink.textContent = 'Download Paper';
+
+        div.appendChild(title);
+        div.appendChild(authors);
+        div.appendChild(abstract);
+        div.appendChild(publishedDate);
+        div.appendChild(downloadLink);
+
+        publishedList.appendChild(div);
+      });
+    }
+
+    // Handle submission form
+    submissionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = submissionForm.title.value.trim();
+      const authors = submissionForm.authors.value.trim();
+      const abstract = submissionForm.abstract.value.trim();
+      const fileInput = submissionForm.file;
+      if (!title || !authors || !abstract || fileInput.files.length === 0) {
+        alert('Please fill all fields and upload a PDF file.');
+        return;
+      }
+      const file = fileInput.files[0];
+      if (file.type !== 'application/pdf') {
+        alert('Only PDF files are allowed.');
+        return;
+      }
+      // Simulate plagiarism detection with random score
+      const plagiarismScore = Math.floor(Math.random() * 40);
+
+      const newPaper = {
+        id: Date.now().toString(),
+        title,
+        authors,
+        abstract,
+        fileUrl: URL.createObjectURL(file),
+        status: 'under review',
+        plagiarismScore,
+        feedbacks: [],
+        revisions: [],
+        published: false,
+        publishedDate: null
+      };
+      submissions.push(newPaper);
+      submissionForm.reset();
+      submissionMessage.textContent = 'Paper submitted successfully!';
+      submissionMessage.classList.remove('hidden');
+      setTimeout(() => {
+        submissionMessage.classList.add('hidden');
+      }, 4000);
+      renderSubmissions();
+      renderReviewers();
+    });
+
+    // Handle assign reviewer form
+    assignReviewerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const paperId = paperSelect.value;
+      const reviewerId = reviewerSelect.value;
+      if (!paperId || !reviewerId) {
+        alert('Please select both paper and reviewer.');
+        return;
+      }
+      // Check if already assigned
+      const alreadyAssigned = assignments.some(
+        (a) => a.paperId === paperId && a.reviewerId === parseInt(reviewerId)
+      );
+      if (alreadyAssigned) {
+        alert('Reviewer already assigned to this paper.');
+        return;
+      }
+      assignments.push({ paperId, reviewerId: parseInt(reviewerId) });
+      alert('Reviewer assigned successfully.');
+      assignReviewerForm.reset();
+      renderSubmissions();
+      renderReviewers();
+    });
+
+    // Populate reviewer select options
+    function populateReviewerSelect() {
+      reviewerSelect.innerHTML = '<option value="" disabled selected>Select Reviewer</option>';
+      reviewers.forEach((rev) => {
+        const option = document.createElement('option');
+        option.value = rev.id;
+        option.textContent = rev.name + ' (' + rev.expertise + ')';
+        reviewerSelect.appendChild(option);
+      });
+    }
+    populateReviewerSelect();
+
+    // Handle profile form update
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = profileForm.name.value.trim();
+      const email = profileForm.email.value.trim();
+      const role = profileForm.role.value;
+      if (!name || !email || !role) {
+        alert('Please fill all profile fields.');
+        return;
+      }
+      userProfile = { name, email, role };
+      profileMessage.textContent = 'Profile updated successfully!';
+      profileMessage.classList.remove('hidden');
+      setTimeout(() => {
+        profileMessage.classList.add('hidden');
+      }, 4000);
+      renderSubmissions();
+      renderReviewers();
+    });
+
+    // Initial render
+    renderSubmissions();
+    renderReviewers();
+    renderPublished();
+  </script>
+</body>
+</html>
